@@ -61,7 +61,7 @@ if __name__=='__main__':
     image = cv2.imread("data/el_tespiti_1.jpg")
 
     ### resmi RGB formatına çeviriniz. ###
-    img=cv2.imread("data/el_tespiti_1.jpg",0)
+    image=cv2.imread("data/el_tespiti_1.jpg",0)
     image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
 
     ### resim yüksekliğini 960 genişliğini 640 olarak düzenleyiniz. ###
@@ -71,6 +71,8 @@ if __name__=='__main__':
     image=cv2.blur(image,(10,10))
 
     ### BGR formatından RGB formatına resmi çeviriniz. ###
+    image=cv2.imread("data/el_tespiti_1.jpg")
+    image=cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
 
 
     ### resimi data klasörü altına "el_tespit_odev.jpg" olarak kaydediniz. ###
@@ -90,14 +92,15 @@ if __name__=='__main__':
     detector = vision.HandLandmarker.create_from_options(options)
 
     ### resimin detect(el tespit edilmiş vektörize halini) oluşturun ###
+    image=mp.Image.create_from_file("data/el_tespiti_1.jpg")
     detection_result= detector.detect(image)
-    annotated_image=draw_landmarks_on_image(image.numpy_view(), detection_result)
+   
 
     ### resimin el tespiti yapılmış görsel halini hesaplayın ###
-
+    annotated_image=draw_landmarks_on_image(image.numpy_view(), detection_result)
 
     ### resimin el tespiti yapılmış görsel halini BGR formatına çevirin  ###
-    
+    image=cv2.cvtColor(image,cv2.COLOR_RGB2BGR)
 
     # resmi data klasörü içerisine "el_tespit_odev.jpg" olarak kaydedilir. 
     cv2.imwrite("data/el_tespit_odev.jpg",annotated_image)
